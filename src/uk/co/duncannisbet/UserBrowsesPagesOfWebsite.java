@@ -1,4 +1,4 @@
-
+//TODO - refactor class to follow Page Object Pattern
 package uk.co.duncannisbet;
 
 import static org.hamcrest.core.Is.is;
@@ -16,6 +16,7 @@ public class UserBrowsesPagesOfWebsite {
 
     private static WebDriver driver;
     private WebElement navBarMenu;
+    private WebElement banner;
 
     @BeforeClass
     public static void beforeClass() {
@@ -45,6 +46,13 @@ public class UserBrowsesPagesOfWebsite {
         thenPageIsDisplayed("How I will test your software | Duncan Nisbet");
     }
 
+    @Test
+    public void userClickingOnBannerIsNavigatedToHome() {
+        givenUserIsOnPage("http://www.duncannisbet.co.uk/what-i-test");
+        whenUserClicksOnBanner();
+        thenPageIsDisplayed("Duncan Nisbet Bespoke Testing");
+    }
+
     private void givenUserIsOnPage(String page) {
         driver.get(page);
 
@@ -53,6 +61,11 @@ public class UserBrowsesPagesOfWebsite {
     private void whenUserClicksOnNavLink(String navlink) {
         navBarMenu = driver.findElement(By.id(navlink));
         navBarMenu.click();
+    }
+
+    private void whenUserClicksOnBanner() {
+        banner = driver.findElement(By.xpath("//div[@id='header']/a/img"));
+        banner.click();
     }
 
     private void thenPageIsDisplayed(String page) {
