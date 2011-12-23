@@ -1,29 +1,23 @@
 
 package uk.co.duncannisbet.navigation;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class NavigationActions {
+public class NavigationElements {
 
     private WebElement navBarMenu;
     private WebElement banner;
     private WebElement carousel;
     private WebElement sidebar;
     private WebElement olderEntries;
+    private WebElement blogPostTitle;
+    private WebElement blogPostReadMore;
     private final WebDriver driver;
 
-    public NavigationActions(WebDriver driver) {
+    public NavigationElements(WebDriver driver) {
         this.driver = driver;
-    }
-
-    public void givenUserIsOnPage(String page) {
-        driver.get(page);
-
     }
 
     public void whenUserClicksOnNavLink(String navlink) {
@@ -46,13 +40,26 @@ public class NavigationActions {
         carousel.click();
     }
 
-    public void thenPageIsDisplayed(String page) {
-        assertThat("Page Title is wrong", driver.getTitle(), is(page));
-    }
-
     public void whenUserClicksOnOlderEntriesLink(String olderEntriesLink) {
         olderEntries = driver.findElement(By.xpath("//a[@href='http://www.duncannisbet.co.uk/blog/page/2']"));
         olderEntries.click();
+
+    }
+
+    public void andCanSeeBogPost(String post) {
+        blogPostTitle = driver.findElement(By.xpath("//a [contains(text(),'" + post + "')]"));
+
+    }
+
+    public void whenUserClicksOnPostTitle(String postTitle) {
+        blogPostTitle = driver.findElement(By.xpath("//a [contains(text(),'" + postTitle + "')]"));
+        blogPostTitle.click();
+
+    }
+
+    public void whenUserClicksOnReadFullPostLinkFor(String readFullPost, String pageId) {
+        blogPostReadMore = driver.findElement(By.xpath("//a[@href='http://www.duncannisbet.co.uk/" + readFullPost + "#more-" + pageId +"']"));
+        blogPostReadMore.click();
 
     }
 

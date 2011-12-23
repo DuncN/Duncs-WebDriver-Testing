@@ -7,10 +7,11 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class UserBrowsesPagesOfWebsite {
+public class UserBrowsesPagesOfWebsiteTests {
 
     private static WebDriver driver = new FirefoxDriver();
-    private NavigationActions navigationActions = new NavigationActions(driver);
+    private IdentifyUserLocationInWebsite navigationActions = new IdentifyUserLocationInWebsite(driver);
+    private NavigationElements navigationElements = new NavigationElements(driver);
 
     @Test
     //smoke test to prove site is actually up
@@ -25,7 +26,7 @@ public class UserBrowsesPagesOfWebsite {
     //finding an element & clicking on it #1
     public void userNavigatesFromHomePageToWhoIAmPage() {
         navigationActions.givenUserIsOnPage("http://www.duncannisbet.co.uk/");
-        navigationActions.whenUserClicksOnNavLink("menu-item-93");
+        navigationElements.whenUserClicksOnNavLink("menu-item-93");
         navigationActions.thenPageIsDisplayed("Duncan Nisbet Software Testing Services | Duncan Nisbet");
 
     }
@@ -34,7 +35,7 @@ public class UserBrowsesPagesOfWebsite {
     //finding an element & clicking on it #2
     public void userNavigatesFromWhoIAmPageToHowITest() {
         navigationActions.givenUserIsOnPage("http://www.duncannisbet.co.uk/who-is-duncan-nisbet");
-        navigationActions.whenUserClicksOnNavLink("menu-item-91");
+        navigationElements.whenUserClicksOnNavLink("menu-item-91");
         navigationActions.thenPageIsDisplayed("How I will test your software | Duncan Nisbet");
     }
 
@@ -42,7 +43,7 @@ public class UserBrowsesPagesOfWebsite {
     //trying out Xpath #1 - Carousel navigation
     public void userNavigatesFromHomePageToClientPageUsingCarousel() {
         navigationActions.givenUserIsOnPage("http://www.duncannisbet.co.uk/");
-        navigationActions.whenUserClicksCarouselLink();
+        navigationElements.whenUserClicksCarouselLink();
         navigationActions.thenPageIsDisplayed("Autotrader | Duncan Nisbet");
 
     }
@@ -51,7 +52,7 @@ public class UserBrowsesPagesOfWebsite {
     //trying out Xpath #2 - Banner navigation
     public void userClickingOnBannerIsNavigatedToHome() {
         navigationActions.givenUserIsOnPage("http://www.duncannisbet.co.uk/what-i-test");
-        navigationActions.whenUserClicksOnBanner();
+        navigationElements.whenUserClicksOnBanner();
         navigationActions.thenPageIsDisplayed("Duncan Nisbet Bespoke Testing");
     }
 
@@ -59,7 +60,7 @@ public class UserBrowsesPagesOfWebsite {
     //trying out Xpath #3 - Sidebar navigation
     public void userClickingOnBlogSidebarLinkIsNavigatedToBlog() {
         navigationActions.givenUserIsOnPage("http://www.duncannisbet.co.uk/");
-        navigationActions.whenUserClicksOnSidebarLink("page_item page-item-315");
+        navigationElements.whenUserClicksOnSidebarLink("page_item page-item-315");
         navigationActions.thenPageIsDisplayed("Blog | Duncan Nisbet");
     }
 
